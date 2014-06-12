@@ -12,7 +12,7 @@ var t = new twit({
 
 
 /* GET home page. */
-router.get('/somewall/', function(req, res) {
+router.get(config.web.basepath + '/', function(req, res) {
 	t.get('statuses/user_timeline', { screen_name: 'boodlare', count: 10 }, function(err, data, response) {
 //	t.get('search/tweets', { screen_name: 'boodla since:2011-11-11', count: 100 }, function(err, data, response) {
 		console.log(data);
