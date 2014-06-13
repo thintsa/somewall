@@ -22,13 +22,38 @@ router.get(config.web.basepath + '/', function (req, res) {
 		q : 'urbangardening since:2011-11-11',
 		count : 10
 	}, function (err, data, response) {
-		console.log(response);
-		var items = data;
+		var items = Array();
+
+		data.statuses.forEach(function (entry) {
+			var item = Object();
+			item.profileimage = entry.user.profile_image_url;
+			item.screenname = entry.user.name;
+			item.nick = entry.user.screen_name;
+			item.text = entry.text;
+			item.date = entry.created_at;
+			item.id = entry.id;
+			items.push(item);
+		});
 
 		ig.tag_media_recent('urbangardening', function (err, medias, pagination, limit) {
-			//console.log(medias);
-
-			var grams = medias;
+			var grams = Array();
+			var i = 1;
+			medias.some(function (entry) {
+				var item = Object();
+				item.profileimage = entry.user.profile_picture;
+				item.image = entry.images.low_resolution;
+				item.screenname = entry.user.full_name;
+				item.nick = entry.user.username;
+				item.date = entry.created_time;
+				if (entry.caption !== null) {
+					item.text = entry.caption.text;
+				} else {
+					item.text = "";
+				}
+				item.id = entry.id;
+				grams.push(item);
+				if (i++ > 9) return true;
+			});
 
 			res.render('index', {
 				title : 'Express',
