@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='<%= basepath%>/stylesheets/somewall.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-	<p>tweets</p>
-	<p><%= tweets%></p>
-	<p>instagrams</p>
-	<p><%= instagrams%></p>
+	<% for(var i = 0; i < items.length; i++) { %>
+		<div class="somewall">
+			<div class="somewallitem">
+				<div class="somewallitemtop">
+					<img src="<%= items[i].profileimage %>" />
+					<div class="somewallscreenname"><%= items[i].screenname %></div>
+					<div class="somewallnick"><%= items[i].nick %></div>
+					<% if (items[i].image !== null) { %>
+					<div class="somewallimg"><img src="<%= items[i].image %>" /></div>
+					<% } %>
+					<div class="somewalltext"><%= items[i].text %></div>
+					<div class="somewalldate"><%= items[i].date %></div>
+				</div>
+			</div>
+		</div>
+	<% } %>
   </body>
 </html>

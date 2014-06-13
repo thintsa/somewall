@@ -27,6 +27,7 @@ router.get(config.web.basepath + '/', function (req, res) {
 		data.statuses.forEach(function (entry) {
 			var item = Object();
 			item.profileimage = entry.user.profile_image_url;
+			item.image = null;
 			item.screenname = entry.user.name;
 			item.nick = entry.user.screen_name;
 			item.text = entry.text;
@@ -41,24 +42,24 @@ router.get(config.web.basepath + '/', function (req, res) {
 			medias.some(function (entry) {
 				var item = Object();
 				item.profileimage = entry.user.profile_picture;
-				item.image = entry.images.low_resolution;
+				item.image = entry.images.low_resolution.url;
 				item.screenname = entry.user.full_name;
 				item.nick = entry.user.username;
-				item.date = entry.created_time;
+				item.date = new Date(entry.created_time * 1000);
 				if (entry.caption !== null) {
 					item.text = entry.caption.text;
 				} else {
 					item.text = "";
 				}
 				item.id = entry.id;
-				grams.push(item);
-				if (i++ > 9) return true;
+				items.push(item);
+				if (i++ > 9)
+					return true;
 			});
 
 			res.render('index', {
-				title : 'Express',
-				tweets : JSON.stringify(items),
-				instagrams : JSON.stringify(grams)
+				basepath : config.web.basepath,
+				items : items
 			});
 		});
 
