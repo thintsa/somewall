@@ -23,15 +23,14 @@ router.get(config.web.basepath + '/', function (req, res) {
 		count : 10
 	}, function (err, data, response) {
 		var items = Array();
-
 		data.statuses.forEach(function (entry) {
 			var item = Object();
 			item.profileimage = entry.user.profile_image_url;
 			item.image = null;
 			item.screenname = entry.user.name;
-			item.nick = entry.user.screen_name;
+			item.nick = "@" + entry.user.screen_name;
 			item.text = entry.text;
-			item.date = entry.created_at;
+			item.date = new Date(Date.parse(entry.created_at));
 			item.id = entry.id;
 			items.push(item);
 		});
@@ -55,6 +54,10 @@ router.get(config.web.basepath + '/', function (req, res) {
 				items.push(item);
 				if (i++ > 9)
 					return true;
+			});
+
+			items.sort(function (a, b) {
+				return new Date(b.date) - new Date(a.date);
 			});
 
 			res.render('index', {

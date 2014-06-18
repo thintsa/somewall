@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel='stylesheet' href='<%= basepath%>/stylesheets/somewall.css' />
+    <link rel='stylesheet' href='<%= basepath%>/static/stylesheets/somewall.css' />
+	<script src="<%= basepath%>/static/javascripts/masonry.js"></script>
   </head>
   <body>
-	<% for(var i = 0; i < items.length; i++) { %>
-		<div class="somewall">
-			<div class="somewallitem">
-				<div class="somewallitemtop">
-					<img src="<%= items[i].profileimage %>" />
-					<div class="somewallscreenname"><%= items[i].screenname %></div>
-					<div class="somewallnick"><%= items[i].nick %></div>
+	<div id="somewall" class="js-masonry" data-masonry-options='{ "columnWidth": 360, "itemSelector": ".somewallitem"}'>
+		<% for(var i = 0; i < items.length; i++) { %>
+				<div class="somewallitem">
+					<div class="somewallitemtop">
+						<img src="<%= items[i].profileimage %>" />
+						<div class="somewallscreenname"><%= items[i].screenname %></div>
+						<div class="somewallnick"><%= items[i].nick %></div>
+					</div>
 					<% if (items[i].image !== null) { %>
 					<div class="somewallimg"><img src="<%= items[i].image %>" /></div>
 					<% } %>
 					<div class="somewalltext"><%= items[i].text %></div>
-					<div class="somewalldate"><%= items[i].date %></div>
+					<div class="somewallitembottom">
+						<div class="somewalldate"><%= items[i].date %></div>
+					</div>
 				</div>
-			</div>
+			<% } %>
 		</div>
-	<% } %>
   </body>
 </html>

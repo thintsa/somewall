@@ -1,0 +1,53 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+div.somewallitem {
+  width: 310px;
+  padding: 20px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+div.somewallitemtop img {
+	float: left;
+	width: 48px;
+	height: 48px;
+}
+
+div.somewallscreenname {
+	margin: 0px 0px 4px 4px;
+	width: 254px;
+	float: left;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+div.somewallnick {
+	margin: 0px 0px 4px 4px;
+	width: 254px;
+	font-size: 14px;
+	color: #707070;
+	float: left;
+}
+
+div.somewallimg {
+	clear: both;
+	width: 306px;
+	height: 306px;
+}
+
+div.somewalltext {
+	clear: both;
+	font: 18px/24px Georgia,"Times New Roman",Palatino,serif;
+}
+
+div.somewallitembottom {}
+
+div.somewalldate {}
