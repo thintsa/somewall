@@ -17,9 +17,11 @@ ig.use({
 });
 
 /* GET home page. */
-router.get(config.web.basepath + '/', function (req, res) {
+router.get(config.web.basepath + '/:hashtag', function (req, res) {
+	var hashtag = req.params.hashtag;
+
 	t.get('search/tweets', {
-		q : 'urbangardening since:2011-11-11',
+		q : hashtag + ' since:2011-11-11',
 		count : 10
 	}, function (err, data, response) {
 		var items = Array();
@@ -35,7 +37,7 @@ router.get(config.web.basepath + '/', function (req, res) {
 			items.push(item);
 		});
 
-		ig.tag_media_recent('urbangardening', function (err, medias, pagination, limit) {
+		ig.tag_media_recent(hashtag, function (err, medias, pagination, limit) {
 			var grams = Array();
 			var i = 1;
 			medias.some(function (entry) {
